@@ -1,0 +1,42 @@
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable(
+      'comments_info',
+      {
+        uuid: {
+          type: Sequelize.DataTypes.UUID,
+          allowNull: false,
+          defaultValue: Sequelize.DataTypes.UUIDV1,
+          primaryKey: true,
+        },
+        name: {
+          type: Sequelize.DataTypes.STRING(120),
+          allowNull: false,
+        },
+        content: {
+          type: Sequelize.DataTypes.STRING(240),
+          allowNull: false,
+        },
+        created_at: {
+          type: Sequelize.DataTypes.DATE,
+          allowNull: true,
+        },
+        updated_at: {
+          type: Sequelize.DataTypes.DATE,
+          allowNull: true,
+        }
+      },
+      {
+        tableName: 'comments_info',
+        schema: 'api_growdev',
+      }
+    )
+  },
+
+  down: async queryInterface => {
+    await queryInterface.dropTable({
+      tableName: 'comments_info',
+      schema: 'api_growdev',
+    })
+  }
+};
