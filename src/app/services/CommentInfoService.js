@@ -8,7 +8,8 @@ class CommentInfoService {
     const response = await CommentInfo.findAndCountAll({
       attributes: [
         'name', 
-        'content'
+        'content',
+        'uuid'
       ],
       limit,
       offset
@@ -54,7 +55,7 @@ class CommentInfoService {
       where: {
         uuid
       },
-      returning: [ 'name', 'content' ]
+      returning: [ 'name', 'content', 'uuid' ]
     }
     )
 
