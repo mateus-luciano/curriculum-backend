@@ -2,7 +2,7 @@ import Comment from '../models/Comment'
 
 class CommentService {
   async showAllComments(page) {
-    const limit = 3
+    const limit = 100
     const offset = (page - 1) * limit
 
     const response = await Comment.findAndCountAll({
@@ -10,6 +10,9 @@ class CommentService {
         'name', 
         'content',
         'uuid'
+      ],
+      order: [
+        ['name', 'DESC'],
       ],
       limit,
       offset
