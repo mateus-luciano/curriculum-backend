@@ -3,11 +3,8 @@ import Comment from '../models/Comment'
 function validateData(req, res, next) {
   const { name, content } = req.body
 
-  if (!name) {
-    return res.json({ message: 'Preencha o campo nome '})
-  }
-  if (!content) {
-    return res.json({ message: 'Preencha o campo comentário '})
+  if (!name || !content) {
+    return res.json({ message: 'Preencha os campos '}).status(400)
   }
 
   next()
@@ -23,7 +20,7 @@ async function validateUuid(req, res, next) {
   })
 
   if (!contact) {
-    return res.json({ message: 'Comentário não encontrado'})
+    return res.json({ message: 'Comentário não encontrado'}).status(404)
   }
   
   next()

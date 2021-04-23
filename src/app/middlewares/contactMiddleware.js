@@ -8,17 +8,8 @@ function validateData(req, res, next) {
     message 
   } = req.body
 
-  if (!name) {
-    return res.json({ message: 'Preencha o campo nome'})
-  }
-  if (!email) {
-    return res.json({ message: 'Preencha o campo email'})
-  }
-  if (!phone) {
-    return res.json({ message: 'Preencha o campo telefone'})
-  }
-  if (!message) {
-    return res.json({ message: 'Preencha o campo mensagem'})
+  if (!name || !email || !phone || !message) {
+    return res.json({ message: 'Preencha os campos'}).status(400)
   }
 
   next()
@@ -34,7 +25,7 @@ async function validateUuid(req, res, next) {
   })
 
   if (!contact) {
-    return res.json({ message: 'Mensagem de contato não encontrada'})
+    return res.json({ message: 'Mensagem de contato não encontrada'}).status(404)
   }
   
   next()

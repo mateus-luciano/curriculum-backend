@@ -1,7 +1,7 @@
 import Comment from '../models/Comment'
 
-class CommentService {
-  async showAllComments(page) {
+class CommentRepository {
+  async getAll(page) {
     const limit = 100
     const offset = (page - 1) * limit
 
@@ -23,7 +23,7 @@ class CommentService {
     }
   }
 
-  async showComment(uuid) {
+  async find(uuid) {
     const response = await Comment.findOne({
       where: {
         uuid
@@ -33,7 +33,7 @@ class CommentService {
     return response
   }
 
-  async createNewComment(body) {
+  async save(body) {
     const { name, content } = body
 
     const response = await Comment.create({
@@ -44,7 +44,7 @@ class CommentService {
     return response
   }
 
-  async checkUpdateComment(body, uuid) {
+  async update(body, uuid) {
     const { name, content } = body
 
     const response = await Comment.update({
@@ -66,7 +66,7 @@ class CommentService {
     return response[1]
   }
 
-  async deleteComment(uuid) {
+  async remove(uuid) {
     await Comment.destroy({
       where: {
         uuid
@@ -75,4 +75,4 @@ class CommentService {
   }
 }
 
-export default new CommentService()
+export default new CommentRepository()

@@ -1,7 +1,7 @@
 import Contact from '../models/Contact'
 
-class ContactService {
-  async showAllContacts(page) {
+class ContactRepository {
+  async getAll(page) {
     const limit = 3
     const offset = (page - 1) * limit
 
@@ -24,7 +24,7 @@ class ContactService {
     }
   }
 
-  async showContact(uuid) {
+  async find(uuid) {
     const response = await Contact.findOne({
       where: {
         uuid
@@ -34,7 +34,7 @@ class ContactService {
     return response
   }
 
-  async createNewContact(body) {
+  async save(body) {
     const { 
         name, 
         email, 
@@ -52,7 +52,7 @@ class ContactService {
     return response
   }
 
-  async checkUpdateContact(body, uuid) {
+  async update(body, uuid) {
     const { 
       name, 
       email, 
@@ -82,7 +82,7 @@ class ContactService {
     return response[1]
   }
 
-  async deleteContact(uuid) {
+  async remove(uuid) {
     await Contact.destroy({
       where: {
         uuid
@@ -91,4 +91,4 @@ class ContactService {
   }
 }
 
-export default new ContactService()
+export default new ContactRepository()

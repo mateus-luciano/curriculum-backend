@@ -1,10 +1,10 @@
 import Sequelize from 'sequelize'
 import databaseConfig from '../config/database'
+
 import Contact from '../app/models/Contact'
 import Comment from '../app/models/Comment'
-import CommentInfo from '../app/models/CommentInfo'
 
-const models = [ Contact, Comment, CommentInfo ]
+const models = [ Contact, Comment ]
 
 class Database {
   constructor() {

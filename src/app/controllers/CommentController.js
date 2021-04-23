@@ -1,11 +1,11 @@
-import CommentService from "../services/CommentService"
+import CommentRepository from '../repositories/CommentRepository';
 
 class CommentController {
   async index(req, res) {
     const { page } = req.query 
 
     try {
-      const data = await CommentService.showAllComments(page ?? 1)
+      const data = await CommentRepository.getAll(page ?? 1)
       
       return res.json(data)
     } catch (error) {
@@ -17,7 +17,7 @@ class CommentController {
     const { uuid } = req.params
     
     try {
-      const data = await CommentService.showComment(uuid)
+      const data = await CommentRepository.find(uuid)
       
       return res.json(data)
     } catch (error) {
@@ -27,9 +27,9 @@ class CommentController {
 
   async store(req, res) {
     try {
-      const data = await CommentService.createNewComment(req.body)
+      const data = await CommentRepository.save(req.body)
 
-      return res.json(data)
+      return res.json(data).status(201)
     } catch (error) {
       return res.status(error.status || 400).json(error)
     }
@@ -39,7 +39,7 @@ class CommentController {
     const { uuid } = req.params
 
     try {
-      const data = await CommentService.checkUpdateComment(req.body, uuid)
+      const data = await CommentRepository.update(req.body, uuid)
       
       return res.json(data)
     } catch (error) {
@@ -51,7 +51,7 @@ class CommentController {
     const { uuid } = req.params
 
     try {
-      await CommentService.deleteComment(uuid)
+      await CommentRepository.remove(uuid)
       
       return res.sendStatus(204)
     } catch (error) {
