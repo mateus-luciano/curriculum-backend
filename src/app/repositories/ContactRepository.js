@@ -1,8 +1,7 @@
 import Contact from '../models/Contact'
 
 class ContactRepository {
-  async getAll(page) {
-    const limit = 3
+  async getAll(page, limit) {
     const offset = (page - 1) * limit
 
     const response = await Contact.findAndCountAll({

@@ -2,10 +2,10 @@ import CommentRepository from '../repositories/CommentRepository';
 
 class CommentController {
   async index(req, res) {
-    const { page } = req.query 
+    const { page, limit } = req.query 
 
     try {
-      const data = await CommentRepository.getAll(page ?? 1)
+      const data = await CommentRepository.getAll(page ?? 1, limit ?? 100)
       
       return res.json(data)
     } catch (error) {

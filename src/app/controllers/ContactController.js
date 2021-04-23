@@ -2,10 +2,10 @@ import ContactRepository from '../repositories/ContactRepository';
 
 class ContactController {
   async index(req, res) {
-    const { page } = req.query 
+    const { page, limit } = req.query 
 
     try {
-      const data = await ContactRepository.getAll(page ?? 1)
+      const data = await ContactRepository.getAll(page ?? 1, limit ?? 10)
 
       return res.json(data)
     } catch (error) {

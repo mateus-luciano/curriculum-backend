@@ -1,8 +1,7 @@
 import Comment from '../models/Comment'
 
 class CommentRepository {
-  async getAll(page) {
-    const limit = 100
+  async getAll(page, limit) {
     const offset = (page - 1) * limit
 
     const response = await Comment.findAndCountAll({
