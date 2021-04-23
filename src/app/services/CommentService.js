@@ -11,9 +11,6 @@ class CommentService {
         'content',
         'uuid'
       ],
-      order: [
-        ['name', 'DESC'],
-      ],
       limit,
       offset
     })
